@@ -62,6 +62,7 @@ class QuestionCardView @JvmOverloads constructor(
     }
 
     private fun setSelection() {
-
+        setCardBackgroundColor(ContextCompat.getColor(context, R.color.white))
+//        binding.answers.isSelected =
     }
 }

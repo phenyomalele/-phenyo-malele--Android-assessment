@@ -15,10 +15,13 @@
             android:id="@+id/title"
             style="@style/Material.Body1.Medium.Light"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Question" />
+            tools:text="Question"
+
+            app:layout_constraintEnd_toEndOf="parent"/>
+        <!--            making sure it attaches to the end of the device, line 18 had to wrap the text view so it doesnt fill the whole screen-->
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/answers"

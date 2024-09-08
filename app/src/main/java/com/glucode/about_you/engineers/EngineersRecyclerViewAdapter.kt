@@ -33,4 +33,19 @@ class EngineersRecyclerViewAdapter(
 //            statusIcon.setDrawable(item.icon)
         }
     }
+
+    fun sortInAscendingByCoffee() {
+        engineers = engineers.sortedBy { it.quickStats.coffees }
+        notifyDataSetChanged()
+    }
+
+    fun sortInAscendingByYears() {
+        engineers = engineers.sortedBy { it.quickStats.years }
+        notifyDataSetChanged()
+    }
+
+    fun sortInAscendingByBugs() {
+        engineers = engineers.sortedBy { it.quickStats.bugs }
+        notifyDataSetChanged()
+    }
 }

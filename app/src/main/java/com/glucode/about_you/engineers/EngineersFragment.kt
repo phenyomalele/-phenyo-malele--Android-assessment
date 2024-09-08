@@ -12,7 +12,8 @@ import com.glucode.about_you.mockdata.MockData
 
 class EngineersFragment : Fragment() {
     private lateinit var binding: FragmentEngineersBinding
-
+    //created an instance of the adapter
+private lateinit var engineerAdapter: EngineersRecyclerViewAdapter
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -30,23 +31,40 @@ class EngineersFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.action_years) {
-            return true
+//        if (item.itemId == R.id.action_years) {
+//            return true
+//        }
+//        return super.onOptionsItemSelected(item)
+
+        //referencing and assigning them to the action
+        when(item.itemId) {
+            R.id.action_years -> engineerAdapter.sortInAscendingByYears()
+            R.id.action_bugs -> engineerAdapter.sortInAscendingByBugs()
+            R.id.action_coffees -> engineerAdapter.sortInAscendingByCoffee()
+
+            else -> super.onOptionsItemSelected(item)
         }
-        return super.onOptionsItemSelected(item)
+        return true
     }
 
     private fun setUpEngineersList(engineers: List<Engineer>) {
-        binding.list.adapter = EngineersRecyclerViewAdapter(engineers) {
+        engineerAdapter = EngineersRecyclerViewAdapter(engineers) {
             goToAbout(it)
         }
+        //initiazling the lateint Adapter instance
+        binding.list.adapter = engineerAdapter
+
         val dividerItemDecoration = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
         binding.list.addItemDecoration(dividerItemDecoration)
     }
 
     private fun goToAbout(engineer: Engineer) {
         val bundle = Bundle().apply {
+
+            //first fragment sends a key to the next(sender). keys must match with recipient
             putString("name", engineer.name)
+
+            putString("role", engineer.role)
         }
         findNavController().navigate(R.id.action_engineersFragment_to_aboutFragment, bundle)
     }
