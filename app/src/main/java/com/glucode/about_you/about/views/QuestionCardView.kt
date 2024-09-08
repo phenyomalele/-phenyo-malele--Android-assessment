@@ -38,6 +38,7 @@ class QuestionCardView @JvmOverloads constructor(
             field = value
             value ?: return
             binding.answers.children.elementAt(value).isSelected = true
+            setSelection()
         }
 
     init {
@@ -57,12 +58,17 @@ class QuestionCardView @JvmOverloads constructor(
         if (!view.isSelected) {
             binding.answers.children.filter { it.isSelected }.forEach {
                 it.isSelected = false
+                setSelection()
             }
         }
+        //index of the selected answer
+        selection = binding.answers.children.indexOf(view)
     }
 
     private fun setSelection() {
-        setCardBackgroundColor(ContextCompat.getColor(context, R.color.white))
-//        binding.answers.isSelected =
+        //checks all the answers for the views and updates their state
+        binding.answers.children.forEachIndexed { index, view ->
+            view.isSelected = index == selection
+        }
     }
 }

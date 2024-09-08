@@ -22,6 +22,9 @@ class AnswerCardView @JvmOverloads constructor(
     private val selectedTextColor: Int
     @ColorInt
     private val deselectedTextColor: Int
+    @ColorInt
+    private val deselectedCardBackgroundColor: Int
+
 
     var title: String? = null
         set(value) {
@@ -35,11 +38,12 @@ class AnswerCardView @JvmOverloads constructor(
 
         //selected colour was set to black. Bug 2
         selectedCardBackgroundColor = whiteColour
+        deselectedCardBackgroundColor = blackColour
         selectedTextColor = blackColour
         deselectedTextColor = whiteColour
         radius = resources.getDimension(R.dimen.corner_radius_normal)
         elevation = resources.getDimension(R.dimen.elevation_normal)
-        setCardBackgroundColor(null)
+        setCardBackgroundColor(deselectedCardBackgroundColor)
     }
 
     override fun setSelected(selected: Boolean) {
@@ -48,7 +52,7 @@ class AnswerCardView @JvmOverloads constructor(
             setCardBackgroundColor(selectedCardBackgroundColor)
             binding.title.setTextColor(selectedTextColor)
         } else {
-            setCardBackgroundColor(null)
+            setCardBackgroundColor(deselectedCardBackgroundColor)
             binding.title.setTextColor(deselectedTextColor)
         }
     }
